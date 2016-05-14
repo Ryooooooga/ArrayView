@@ -235,4 +235,47 @@ namespace Bell {
 		}
 	};
 
+	//	makeArrayView
+	template <typename Type>
+	constexpr ArrayView<Type> makeArrayView(const Type* data, std::size_t length) noexcept
+	{
+		return { data, length };
+	}
+
+	template <typename Type, std::size_t N>
+	constexpr ArrayView<Type> makeArrayView(const Type (&a)[N]) noexcept
+	{
+		return { a };
+	}
+
+	template <typename Type, std::size_t N>
+	constexpr ArrayView<Type> makeArrayView(const std::array<Type, N>& a) noexcept
+	{
+		return { a };
+	}
+
+	template <typename Type, typename Allocator>
+	ArrayView<Type> makeArrayView(const std::vector<Type>& v) noexcept
+	{
+		return { v };
+	}
+
+	template <typename Type, typename Traits, typename Allocator>
+	ArrayView<Type> makeArrayView(const std::basic_string<Type, Traits, Allocator>& s) noexcept
+	{
+		return { s };
+	}
+	
+	template <typename Type, typename Traits>
+	constexpr ArrayView<Type> makeArrayView(const boost::basic_string_ref<Type, Traits>& s) noexcept
+	{
+		return { s };
+	}
+
+	template <typename Type>
+	constexpr ArrayView<Type> makeArrayView(const ArrayView<Type>& a) noexcept
+	{
+		return a;
+	}
+
 }	//	namespace Bell
