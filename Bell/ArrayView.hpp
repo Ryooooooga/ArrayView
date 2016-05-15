@@ -101,7 +101,7 @@ namespace Bell {
 
 		const_reverse_iterator rbegin() const noexcept
 		{
-			return reverse_iterator(end());
+			return const_reverse_iterator(end());
 		}
 
 		const_reverse_iterator crbegin() const noexcept
@@ -111,7 +111,7 @@ namespace Bell {
 
 		const_reverse_iterator rend() const noexcept
 		{
-			return reverse_iterator(begin());
+			return const_reverse_iterator(begin());
 		}
 
 		const_reverse_iterator crend() const noexcept
