@@ -11,7 +11,7 @@
 
 #include <array>
 #include <vector>
-#include <boost/utility/string_ref.hpp>
+#include <boost/utility/string_view.hpp>
 
 namespace Bell {
 
@@ -59,7 +59,7 @@ namespace Bell {
 			: ptr_(s.data()), size_(s.size()) {}
 
 		template <typename Traits>
-		constexpr ArrayView(const boost::basic_string_ref<Type, Traits>& s) noexcept
+		constexpr ArrayView(const boost::basic_string_view<Type, Traits>& s) noexcept
 			: ptr_(s.data()), size_(s.size()) {}
 
 		//	operators
@@ -180,9 +180,9 @@ namespace Bell {
 		}
 
 		template <typename Traits = std::char_traits<Type>>
-		constexpr boost::basic_string_ref<Type, Traits> toStringRef() const noexcept
+		constexpr boost::basic_string_view<Type, Traits> toStringRef() const noexcept
 		{
-			return boost::basic_string_ref<Type, Traits>(ptr_, size_);
+			return boost::basic_string_view<Type, Traits>(ptr_, size_);
 		}
 
 		ArrayView& clear() noexcept
@@ -267,7 +267,7 @@ namespace Bell {
 	}
 	
 	template <typename Type, typename Traits>
-	constexpr ArrayView<Type> makeArrayView(const boost::basic_string_ref<Type, Traits>& s) noexcept
+	constexpr ArrayView<Type> makeArrayView(const boost::basic_string_view<Type, Traits>& s) noexcept
 	{
 		return { s };
 	}

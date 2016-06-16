@@ -61,7 +61,7 @@ TEST(Bell_ArrayView, Constructor)
 	const array<int, 4>	a = {{ 0, 1, 2, 3 }};
 	const vector<int>	b = { 0, 1, 2, 3 };
 	const string		c = u8"Test";
-	const string_ref	d = c;
+	const string_view	d = c;
 
 	const ArrayView<int>  x0 = a;
 	const ArrayView<int>  x1 = b;
@@ -195,7 +195,7 @@ TEST(Bell_ArrayView, Conversion)
 
 	static_assert(is_same<decltype(x0.toVector()	), vector<int>	>::value, "");
 	static_assert(is_same<decltype(x1.toString()	), string		>::value, "");
-	static_assert(is_same<decltype(x1.toStringRef()	), string_ref	>::value, "");
+	static_assert(is_same<decltype(x1.toStringRef()	), string_view	>::value, "");
 
 	EXPECT_EQ(b, x0.toVector());
 	EXPECT_EQ(u8"test", x1.toString());
