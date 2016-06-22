@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <cassert>
 #include <array>
 #include <vector>
 #include <boost/utility/string_view.hpp>
