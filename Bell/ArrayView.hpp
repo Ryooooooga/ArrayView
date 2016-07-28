@@ -12,7 +12,6 @@
 #include <cassert>
 #include <array>
 #include <vector>
-#include <boost/utility/string_view.hpp>
 
 namespace Bell {
 
@@ -54,14 +53,6 @@ namespace Bell {
 		template <typename Allocator>
 		ArrayView(const std::vector<Type, Allocator>& v) noexcept
 			: ptr_(v.data()), size_(v.size()) {}
-
-		template <typename Traits, typename Allocator>
-		ArrayView(const std::basic_string<Type, Traits, Allocator>& s) noexcept
-			: ptr_(s.data()), size_(s.size()) {}
-
-		template <typename Traits>
-		constexpr ArrayView(const boost::basic_string_view<Type, Traits>& s) noexcept
-			: ptr_(s.data()), size_(s.size()) {}
 
 		//	operators
 		bool operator ==(const ArrayView& a) const noexcept
@@ -174,18 +165,6 @@ namespace Bell {
 			return std::vector<Type, Allocator>(begin(), end());
 		}
 
-		template <typename Traits = std::char_traits<Type>, typename Allocator = std::allocator<Type>>
-		std::basic_string<Type, Traits, Allocator> toString() const
-		{
-			return std::basic_string<Type, Traits, Allocator>(ptr_, size_);
-		}
-
-		template <typename Traits = std::char_traits<Type>>
-		constexpr boost::basic_string_view<Type, Traits> toStringRef() const noexcept
-		{
-			return boost::basic_string_view<Type, Traits>(ptr_, size_);
-		}
-
 		ArrayView& clear() noexcept
 		{
 			ptr_ = nullptr;
@@ -259,18 +238,6 @@ namespace Bell {
 	ArrayView<Type> makeArrayView(const std::vector<Type>& v) noexcept
 	{
 		return { v };
-	}
-
-	template <typename Type, typename Traits, typename Allocator>
-	ArrayView<Type> makeArrayView(const std::basic_string<Type, Traits, Allocator>& s) noexcept
-	{
-		return { s };
-	}
-	
-	template <typename Type, typename Traits>
-	constexpr ArrayView<Type> makeArrayView(const boost::basic_string_view<Type, Traits>& s) noexcept
-	{
-		return { s };
 	}
 
 	template <typename Type>
