@@ -42,6 +42,9 @@ namespace Bell {
 		constexpr ArrayView(const Type* data, size_type length) noexcept
 			: ptr_(data), size_(ptr_ ? length : 0) {}
 
+		constexpr ArrayView(const std::initializer_list<Type>& list) noexcept
+			: ptr_(std::begin(list)), size_(list.size()) {}
+
 		template <std::size_t N>
 		constexpr ArrayView(const Type (&a)[N]) noexcept
 			: ptr_(a), size_(N) {}
